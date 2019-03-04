@@ -13,14 +13,15 @@ python:
 - 3.6
 
 install:
+  - cd legion
   - cp ./requirements.txt ./deps/
   - bash ./deps/installPythonLibs.sh
 
 script:
-  - python ./test.py
+  - python ./legion/test.py
 
 after_success:
-  - cd ./docker/
+  - cd ./legion/docker/
   - docker login -u $DOCKER_USER -p $DOCKER_PASS
   - export REPO=gvit/legion
   - docker build -f Dockerfile -t $REPO:$COMMIT .
